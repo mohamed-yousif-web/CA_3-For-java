@@ -1,32 +1,33 @@
 class Solution {
-public:
-    int romanToInt(string s) {
+    public int romanToInt(String s) {
         int total = 0;
 
         for (int i = 0; i < s.length(); i++) {
-            int current = 0;
+
+            int current = switch (s.charAt(i)) {
+                case 'I' -> 1;
+                case 'V' -> 5;
+                case 'X' -> 10;
+                case 'L' -> 50;
+                case 'C' -> 100;
+                case 'D' -> 500;
+                case 'M' -> 1000;
+                default -> 0;
+            };
+
             int next = 0;
 
-            switch (s[i]) {
-                case 'I': current = 1; break;
-                case 'V': current = 5; break;
-                case 'X': current = 10; break;
-                case 'L': current = 50; break;
-                case 'C': current = 100; break;
-                case 'D': current = 500; break;
-                case 'M': current = 1000; break;
-            }
-
             if (i + 1 < s.length()) {
-                switch (s[i + 1]) {
-                    case 'I': next = 1; break;
-                    case 'V': next = 5; break;
-                    case 'X': next = 10; break;
-                    case 'L': next = 50; break;
-                    case 'C': next = 100; break;
-                    case 'D': next = 500; break;
-                    case 'M': next = 1000; break;
-                }
+                next = switch (s.charAt(i + 1)) {
+                    case 'I' -> 1;
+                    case 'V' -> 5;
+                    case 'X' -> 10;
+                    case 'L' -> 50;
+                    case 'C' -> 100;
+                    case 'D' -> 500;
+                    case 'M' -> 1000;
+                    default -> 0;
+                };
             }
 
             if (current < next) {
@@ -38,5 +39,4 @@ public:
 
         return total;
     }
-};
-
+}
